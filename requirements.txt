@@ -1,6 +1,6 @@
 streamlit
 numpy
-win32com.client
+Dispatch
 keras
 cv2
 sklearn
