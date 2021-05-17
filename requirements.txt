@@ -2,6 +2,6 @@ streamlit
 numpy
 Dispatch
 keras
-opencv2-python
+opencv-python==4.5.1.48
 sklearn
 matplotlib
