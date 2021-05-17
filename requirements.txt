@@ -1,0 +1,7 @@
+streamlit
+numpy
+win32com.client
+keras
+cv2
+sklearn
+matplotlib
