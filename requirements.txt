@@ -2,6 +2,6 @@ streamlit
 numpy
 Dispatch
 keras
-cv2
+opencv2-python
 sklearn
 matplotlib
