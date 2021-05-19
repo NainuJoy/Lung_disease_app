@@ -4,7 +4,7 @@ numpy==1.19.5
 Dispatch
 keras==2.4.3
 Keras-Preprocessing==1.1.2
-opencv-python==4.5.1.48
+opencv-contrib-python-headless
 sklearn
 matplotlib==3.3.4
 scikit-learn==0.24.2
