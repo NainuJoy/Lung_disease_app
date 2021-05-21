@@ -1,4 +1,4 @@
-
+Python==3.8.3
 streamlit==0.81.1
 numpy==1.19.5
 Dispatch
@@ -10,5 +10,4 @@ matplotlib==3.3.4
 scikit-learn==0.24.2
 tensorflow
 tensorflow-estimator
-pywin32
-python==3.8
+
