@@ -10,4 +10,4 @@ matplotlib==3.3.4
 scikit-learn==0.24.2
 tensorflow==2.4.1
 tensorflow-estimator==2.4.0
-pywin32
+pypiwin32
