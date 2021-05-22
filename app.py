@@ -5,7 +5,9 @@ import numpy as np
 from PIL import Image, ImageEnhance
 import os
 import cv2
-from keras.models import load_model
+import tensorflow as tf
+from tensorflow.python.keras.models import load_model
+#from keras.models import load_model
 from win32com.client import Dispatch
 
 def speak(text):
@@ -71,7 +73,7 @@ def main():
 	elif choices=="Home":
 		st.write("Welcome")
 		st.write("Lung disease is any problem in the lungs that prevents the lungs from working properly.")
-		st.image('picture.gif')
+		st.image('tenor (1).gif')
 		st.write("Lung diseases are some of the most common medical conditions in the world. Tens of millions of people have lung disease in the U.S. alone. Smoking, infections, and genes cause most lung diseases.")
 		
 
@@ -85,6 +87,5 @@ def main():
 
 if __name__=='__main__':
 	main()
-
 
 
