@@ -4,7 +4,7 @@ opencv-python-headless
 numpy==1.19.5
 keras==2.4.3
 tensorflow==2.4.1
-win32
+
 
 
 
