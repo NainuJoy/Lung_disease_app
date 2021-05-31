@@ -13,9 +13,9 @@ import long_responses as long
 #from keras.models import load_model
 #from win32com.client import Dispatch
 
-"""def speak(text):
-	speak=Dispatch(("SAPI.SpVoice"))
-	speak.Speak(text)"""
+#def speak(text):
+	#speak=Dispatch(("SAPI.SpVoice"))
+	#speak.Speak(text)
 model = load_model('MyTrainingModel.h5')
 
 def preprocessing(img):
