@@ -8,10 +8,10 @@ import cv2
 import tensorflow as tf
 from tensorflow.python.keras.models import load_model
 import re
-#import long_responses as long	
+import long_responses as long	
 
 #from keras.models import load_model
-from win32com.client import Dispatch
+#from win32com.client import Dispatch
 
 """def speak(text):
 	speak=Dispatch(("SAPI.SpVoice"))
