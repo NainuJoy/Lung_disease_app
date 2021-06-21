@@ -36,41 +36,54 @@ def preprocessing(img):
 def main():
 	st.title("Lung Disease Detection")
 	st.set_option('deprecation.showfileUploaderEncoding',False)
-	activites=["Home","Classification","ChatBot"]
+	activites=["Home","Disease Detection","ChatBot"]
 	choices=st.sidebar.selectbox("Select Activities",activites)
 	cln=1
 
-	if choices=="Classification":
+	if choices=="Disease Detection":
 		#st.subheader("Lung Disease Classification")
+		
+		#with col1:
 		img_file=st.file_uploader("Upload File",type=['png','jpg','jpeg'])
-		if img_file is not None:
-			up_img=Image.open(img_file)
-			st.image(up_img)
-		if st.button("process"):
-			#try:
-			img=np.asarray(up_img)
-			img=cv2.resize(img, (32,32))
-			img=preprocessing(img)
-			img=img.reshape(1, 32, 32, 1)
-			prediction=model.predict(img)
-			classIndex=model.predict_classes(img)
-			probabilityValue=np.amax(prediction)
-			if probabilityValue>0.50:
-				if classIndex==0:
-					st.success("Detected Emphysema")
-					#speak("Detected Emphysema")
-				elif classIndex==1:
-					st.success("Detected Fibrosis")
-					#speak("Detected Fibrosis")
-				elif classIndex==2:
-					st.success("Detected Normal")
-					#speak("Detected Normal")
-				elif classIndex==3:
-					st.success("Detected Pneumonia")
-					#speak("Detected Pneumonia")
-				
-			#except Exception as e:
-				#st.error("Connection Problem,Refresh Again")
+		col1, col2 = st.beta_columns((2,1))
+		with col2:
+			result = st.button("DETECTION")
+		with col1:
+			if img_file is not None:
+				up_img=Image.open(img_file)
+				st.image(up_img,use_column_width=True)
+		#if st.button("Process"):
+		if result:
+			try:
+				img=np.asarray(up_img)
+				img=cv2.resize(img, (32,32))
+				img=preprocessing(img)
+				img=img.reshape(1, 32, 32, 1)
+				prediction=model.predict(img)
+				classIndex=model.predict_classes(img)
+				probabilityValue=np.amax(prediction)
+				if probabilityValue>0.50:
+					if classIndex==0:
+						st.success("Detected Emphysema")
+						#speak("Detected Emphysema")
+						#speak("Move to chatbot option in activities, if you have any queries about this disease")
+					elif classIndex==1:
+						st.success("Detected Fibrosis")
+						#speak("Detected Fibrosis")
+						#speak("Move to chatbot option in activities, if you have any queries about this disease")
+					elif classIndex==2:
+						st.success("Detected Normal")
+						#speak("Detected Normal")
+						#speak("Move to chatbot option in activities, if you have any queries about this disease")
+					elif classIndex==3:
+						st.success("Detected Pneumonia")
+						#speak("Detected Pneumonia")
+						#speak("Move to chatbot option in activities, if you have any queries about this disease")
+					elif classIndex==4:
+						st.success("Upload correct X-ray image")
+						#speak("Upload correct X-ray image")
+			except Exception as e:
+				st.error("Upload Error")
 			
 
 
@@ -121,14 +134,15 @@ def main():
 			response('See you!', ['bye', 'goodbye'], single_response=True)
 			response('I\'m doing fine, and you?', ['how', 'are', 'you', 'doing'], required_words=['how'])
 			response('You\'re welcome!', ['thank', 'thanks'], single_response=True)
-			response('Thank you!', ['i', 'love', 'code', 'palace'], required_words=['code', 'palace'])
+			response('Thank you!', ['i', 'like', 'this', 'app'], required_words=['like', 'app'])
 		# Longer responses
 			response(long.R_ADVICE, ['give', 'advice'], required_words=['advice'])
-			response(long.R_P1, ['what', 'causes', 'pneumonia'], required_words=['causes', 'pneumonia'])
+			response(long.R_P1, ['what', 'causes', 'pneumonia'], required_words=['causes' or 'reasons' or 'cause' or'reason','pneumonia'],single_response=True)
 			response(long.R_P2, ['what', 'are', 'the','symptoms', 'of','pneumonia'], required_words=['symptoms', 'pneumonia'])
-			response(long.R_P3, ['what', 'are', 'the','home', 'remedies', 'for', 'pneumonia'], required_words=['home', 'remedies', 'pneumonia'])
+			
+			response(long.R_P3, ['what', 'are', 'the','home', 'remedies', 'for', 'pneumonia'], required_words=['remedies' or 'solutions' or 'solution' or 'remedy', 'pneumonia'],single_response=True)
 			response(long.R_E1, ['what', 'is', 'emphysema'], required_words=['what', 'emphysema'])
-			response(long.R_E2, ['what', 'causes', 'emphysema'], required_words=['causes', 'emphysema'])
+			response(long.R_E2, ['what', 'causes', 'emphysema'], required_words=['causes' or 'reason' or'reasons' or 'cause', 'emphysema'],single_response=True)
 			response(long.R_F1, ['what', 'is', 'fibrosis'], required_words=['what', 'fibrosis'])
 			response(long.R_F2, ['what', 'are', 'the','symptoms', 'of','fibrosis'], required_words=['symptoms', 'fibrosis'])
 			response(long.R_F3, ['what', 'age', 'does','pulmonary', 'fibrosis','start'], required_words=['age', 'fibrosis',])
