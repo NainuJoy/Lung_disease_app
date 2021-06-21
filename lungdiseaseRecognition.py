@@ -54,11 +54,19 @@ plt.show()
 
 
 def preprocessing(img):
-	img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-	img=cv2.equalizeHist(img)
-	img=img/255
-	return img
-
+	try:
+		img=img.astype('uint8')
+		img=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+		img=cv2.equalizeHist(img)
+		img=img/255
+		return img
+	except Exception as e:
+		img=img.astype('uint8')
+		img=cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+		img=cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+		img=cv2.equalizeHist(img)
+		img=img/255
+		return img
 x_train=np.array(list(map(preprocessing, x_train)))
 x_test=np.array(list(map(preprocessing, x_test)))
 x_validation=np.array(list(map(preprocessing, x_validation)))
@@ -116,9 +124,30 @@ print(model.summary())
 
 history=model.fit(dataGen.flow(x_train, y_train,batch_size=5),
 	#steps_per_epoch=10000,
-	epochs=100,
+	epochs=30,
 	validation_data=(x_validation,y_validation),
 	shuffle=1)
 
 model.save("MyTrainingModel.h5")
+print(history.history.keys())
+plt.figure(1)
+plt.plot(history.history['accuracy'])
+plt.plot(history.history['val_accuracy'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'validation'], loc='lower right')
+plt.show()
+
+plt.figure(2)
+plt.plot(history.history['loss'])
+plt.plot(history.history['val_loss'])
+plt.title('model loss')
+plt.ylabel('loss')
+plt.xlabel('epoch')
+plt.legend(['train', 'validation'], loc='upper left')
+plt.show()
+
+
+
 
